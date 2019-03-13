@@ -1,0 +1,22 @@
+.list {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+   
+  }
+ .gridList {
+    overflow-y: unset !important;
+    margin: 20px !important;
+    word-break: break-word;
+
+  }
+  .icon{
+    color: rgba(255, 255, 255, 0.54)
+  }
+
+  .tile{
+    border-style: solid;
+    border-color: black; 
+    border-width: thin;
+    height: auto;
+    word-break: break-word;
+  }

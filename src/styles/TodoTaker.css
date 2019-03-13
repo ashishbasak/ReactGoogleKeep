@@ -1,0 +1,11 @@
+.saveButton{
+    float: right;
+}
+.tasktitle{
+    width:100%;
+    margin-bottom: 10px !important;
+
+}
+.content{
+    width:100%;
+}

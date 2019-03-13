@@ -1,0 +1,21 @@
+
+.root {
+  display: flex,
+}
+.appBar {
+  z-index:1;
+}
+.drawer {
+  width: 240px;
+  flex-shrink: 0;
+
+}
+.drawerPaper {
+  width: 240px;
+  flex-shrink: 0;
+  margin-top: 70px;
+}
+content {
+  flex-grow: 1;
+  padding:30;
+}
