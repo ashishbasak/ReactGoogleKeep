@@ -5,6 +5,10 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+
 import '../styles/TodoTaker.css'
 
 
@@ -16,27 +20,33 @@ class TodoTaker extends Component{
         super(props);
         this.state={
             title:"",
-            content:""
+            content:"",
+            expanded:false
         }
 
         //binding is important if u want to change any property using this function
-        this.handleChange1=this.handleChange1.bind(this)
-        this.handleChange2=this.handleChange2.bind(this)
+        this.handleTitle=this.handleTitle.bind(this)
+        this.handleContent=this.handleContent.bind(this)
 
         this.handleSubmit=this.handleSubmit.bind(this)
 
     }
 
-    handleChange1(e){
+    handleTitle(e){
 
         this.setState({
             title:e.target.value
         });
     }
-    handleChange2(e){
+    handleContent(e){
 
         this.setState({
             content:e.target.value
+        });
+    }
+    handleExpandedPanel = panel => (event, expanded) => {
+        this.setState({
+            expanded: expanded ? panel : false
         });
     }
 
@@ -44,20 +54,33 @@ class TodoTaker extends Component{
     this.props.handleParent(this.state.title,this.state.content);
     this.state.title="";
     this.state.content="";
-
+    this.state.expanded=false;
 }
 
     render(){
-        return(<div><Card >
-            <CardContent>
-            <TextField className='tasktitle' placeholder="Title" onChange={this.handleChange1} title={this.state.title}/> <br/>
-            <TextField className='content' placeholder="Take your task..." onChange={this.handleChange2} content={this.state.content}/> 
+        return(<div>
+            <ExpansionPanel
+            expanded={this.state.expanded}
+            onChange={this.handleExpandedPanel('panel')}
+            style={{width: 600}}
+            >
 
-            </CardContent>
-            <CardActions className='saveButton'>
+            <ExpansionPanelSummary>
+            <div>
+            <TextField className='tasktitle' placeholder="Title" onChange={this.handleTitle} value={this.state.title}/> <br/>
+            </div>
+
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails className='blockDisplay'>
+          <TextField className='content' placeholder="Take your task..." onChange={this.handleContent} value={this.state.content}/> <br/>
+          <div className='saveButton'>
               <Button variant="contained" color="secondary" onClick={this.handleSubmit}>Add Task</Button>
-            </CardActions>
-          </Card></div>)
+            </div>
+            
+        </ExpansionPanelDetails>
+        </ExpansionPanel>
+</div>)
+          
     }
 }
 

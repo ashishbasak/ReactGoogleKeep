@@ -1,11 +1,14 @@
 .saveButton{
     float: right;
+    margin: 10px;
 }
 .tasktitle{
-    width:100%;
-    margin-bottom: 10px !important;
-
+    width:500px;
 }
 .content{
     width:100%;
+    display:block;
+}
+.blockDisplay{
+    display: block !important;
 }

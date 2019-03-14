@@ -12,7 +12,7 @@ class TodoList extends Component {
     this.toDoListRemove=this.toDoListRemove.bind(this)
 }
 toDoListRemove(id){
-    //actual delete will happen in todoAPP
+    //actual delete will happen in mainComponent
     this.props.toDoAppremoveTask(id);
 }
 render(){

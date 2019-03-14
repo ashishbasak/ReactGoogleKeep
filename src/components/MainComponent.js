@@ -4,6 +4,7 @@ import TodoList from './TodoList';
 import ToolbarComponent from './ToolbarComponent';
 import '../styles/MainComponent.css'
 import MyDrawer from './MyDrawer';
+import saveTask from'../routes/FetchCalls';
 
 
 class MainComponent extends Component{
@@ -28,27 +29,26 @@ class MainComponent extends Component{
         }];
                 
 if (newState[0].id!=null) {
+    //this is an async callback method. Printing tasks on the next line of this line will print 1 step later for each value.
     this.setState((currState)=>({
         tasks:currState.tasks.concat(newState)
     }));
 }
-        //this is an async callback method. Printing tasks on the next line of this line will print 1 step later for each value.
-        
-    }
+}
 
     toDoAppremoveTask(id){
         console.log(id)
-        this.state.tasks = this.state.tasks.filter((item) => item.id != id);
         this.setState((currState)=>({
-            tasks:currState.tasks
+            tasks:currState.tasks.filter((item) => item.id != id)
         }));
     }
 
     render(){
+        saveTask('ashish.basak',this.state.tasks);
 
         //we can pass props to these components by using the sates of this component
         return (<div><ToolbarComponent title={this.state.title}/> 
-                <MyDrawer />
+                    <MyDrawer />
                     <div className='container'>
                         <div className='todotaker'>
                             <TodoTaker handleParent={this.handleParent}/>
