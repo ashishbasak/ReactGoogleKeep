@@ -52,9 +52,11 @@ class TodoTaker extends Component{
 
     handleSubmit(e){
     this.props.handleParent(this.state.title,this.state.content);
-    this.state.title="";
-    this.state.content="";
-    this.state.expanded=false;
+    
+    this.setState({
+        title:"",
+        content:"",
+        expanded:false   });
 }
 
     render(){

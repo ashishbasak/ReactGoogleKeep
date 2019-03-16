@@ -4,7 +4,8 @@ import TodoList from './TodoList';
 import ToolbarComponent from './ToolbarComponent';
 import '../styles/MainComponent.css'
 import MyDrawer from './MyDrawer';
-import saveTask from'../routes/FetchCalls';
+import saveTask from'../routes/SaveTasks';
+import getTasks from '../routes/GetTasks'
 
 
 class MainComponent extends Component{
@@ -15,6 +16,12 @@ class MainComponent extends Component{
             tasks: []
         }
 
+        //prefetch the saved taks of the user
+        getTasks(this.props.userId).then((response)=>{
+            this.setState((currState)=>({
+                tasks:currState.tasks.concat(response.notes)
+            }))
+        });
 
         this.handleParent=this.handleParent.bind(this)
         this.toDoAppremoveTask=this.toDoAppremoveTask.bind(this)
@@ -34,6 +41,7 @@ if (newState[0].id!=null) {
         tasks:currState.tasks.concat(newState)
     }));
 }
+
 }
 
     toDoAppremoveTask(id){
@@ -41,14 +49,15 @@ if (newState[0].id!=null) {
         this.setState((currState)=>({
             tasks:currState.tasks.filter((item) => item.id != id)
         }));
+        saveTask(this.props.userId,this.state.tasks);
+
     }
 
     render(){
-        saveTask('ashish.basak',this.state.tasks);
-
+        //to save updated state tasks in db
+        saveTask(this.props.userId,this.props.pass,this.props.first,this.props.last,this.state.tasks);
         //we can pass props to these components by using the sates of this component
-        return (<div><ToolbarComponent title={this.state.title}/> 
-                    <MyDrawer />
+        return (<div><MyDrawer />
                     <div className='container'>
                         <div className='todotaker'>
                             <TodoTaker handleParent={this.handleParent}/>
